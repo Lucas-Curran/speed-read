@@ -2,6 +2,7 @@ package humanbenchmark;
 
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 
 public class SQLiteConnect {
@@ -22,7 +23,6 @@ public class SQLiteConnect {
 	 * @return
 	 */
 	public static Connection connect(String database) {
-            System.out.println("bryh");
             String url = "jdbc:sqlite:" + database;
             try {
 		Class.forName("org.sqlite.JDBC");
@@ -42,7 +42,7 @@ public class SQLiteConnect {
 	 * @param info
          * @param name
 	 */
-	public void updateStudent(String name, ArrayList<String> info) {
+	public void updateReading(String name, ArrayList<String> info) {
             String sql = "UPDATE Schedules SET"
 			+ " Subject1 = ? ,"
 			+ " Subject2 = ? ,"
@@ -71,7 +71,7 @@ public class SQLiteConnect {
 	 * @param info
          * @param name
 	 */
-	public void addStudent(String name, ArrayList<String> info) {
+	public void addTest(String name, ArrayList<String> info) {
             String sql = "INSERT INTO Schedules(Name, Subject1, Subject2,"
 			+ " Subject3, Subject4, Subject5, Subject6, Subject7,"
                         + " Subject8, Subject9) VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -86,47 +86,33 @@ public class SQLiteConnect {
                 System.out.println(e.getMessage());
             }
 	}
-	/**
-	 * Deletes a student from this plane of existence
-	 * @param name
-	 */
-	public void deleteStudent(String name) {
-            String sql = "DELETE FROM Schedules WHERE Name = ?";
-            try {
-		PreparedStatement input = connect("StudentSchedule.db").prepareStatement(sql);
-                input.setString(1, name);
-                input.executeUpdate();
-		conn.close();
-            } catch (SQLException e) {
-		System.out.println(e.getMessage());
-            }
-	}
+
 
         /**
-	 * Get student info
-         * @param name
+	 * Get table info
+         * 
          * @return
 	 */
-	public ArrayList<String> getStudent(String name) {
-            String sql = "SELECT Name, Subject1, Subject2, Subject3, Subject4,"
-			+ " Subject5, Subject6, Subject7, Subject8, Subject9 "
-                        + " FROM Schedules WHERE Name == ?";
-            ArrayList<String> info = new ArrayList<>();
+	public DefaultTableModel getData() {
+            String sql = "SELECT ID, Reading, Reaction, Date";
+            
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("ID");
+            model.addColumn("Reading");
+            model.addColumn("Reaction");
+            model.addColumn("Date");
             try {
-		PreparedStatement input = connect("StudentSchedule.db").prepareStatement(sql);
-		input.setString(1, name);
-                        
-            ResultSet rs = input.executeQuery();
-            info.add(rs.getString("Name"));
-                        
-            for (int i = 1; i < 10; i++) {
-                info.add(rs.getString("Subject" + String.valueOf(i)));
-            }
+		PreparedStatement input = connect("benchmark_data.db").prepareStatement(sql);
+                ResultSet rs = input.executeQuery();
+                
+                while (rs.next()) {
+                    model.addRow(new Object[]{rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4)});
+                }
 
             conn.close();
             } catch (SQLException e) {
 		System.out.println(e.getMessage());
             }
-            return info;
+            return model;
         }
 }
