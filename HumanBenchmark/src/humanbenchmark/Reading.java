@@ -90,7 +90,7 @@ public class Reading extends Canvas implements MouseListener {
         } else if (counter == 1) {          
                    Timer timer = new Timer();
                    Random rNumb = new Random();
-                   int delay = 350;
+                   int delay = 500;
                    random = rNumb.nextInt(10);
                    g.drawString("The number you need is: " + rNumber, 25, 400);
                    TimerTask tt = new TimerTask() {
