@@ -41,11 +41,11 @@ public class SQLiteConnect {
 	 * Creates a new student from the database
          * @param date
 	 */
-	public void addRow( String date) {
+	public void addRow() {
             String sql = "INSERT INTO Data(ID, Timing, Reaction, Date) VALUES(?,?,?,?) ";
             try {
 		PreparedStatement input = connect("benchmark_data").prepareStatement(sql);
-                input.setString(4, date);
+                input.setString(4, String.valueOf(java.time.LocalDate.now()));
 		input.executeUpdate();
 		conn.close();
             } catch (SQLException e) {
