@@ -39,16 +39,12 @@ public class SQLiteConnect {
 
 	/**
 	 * Creates a new student from the database
-	 * @param timing
-         * @param reading
          * @param date
 	 */
-	public void addTest(int timing, int reading, String date) {
+	public void addRow( String date) {
             String sql = "INSERT INTO Data(ID, Timing, Reaction, Date) VALUES(?,?,?,?) ";
             try {
 		PreparedStatement input = connect("benchmark_data").prepareStatement(sql);
-                input.setInt(2, timing);
-                input.setInt(3, reading);
                 input.setString(4, date);
 		input.executeUpdate();
 		conn.close();
@@ -57,6 +53,35 @@ public class SQLiteConnect {
             }
 	}
 
+        /**
+	 * Creates a new student from the database
+         * @param timing
+	 */
+	public void updateTiming(int timing) {
+            String sql = "UPDATE Data SET Timing = " + timing + " WHERE id = ?";
+            try {
+		PreparedStatement input = connect("benchmark_data").prepareStatement(sql);
+		input.executeUpdate();
+		conn.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+	}
+        
+        /**
+	 * Creates a new student from the database
+         * @param reaction
+	 */
+	public void updateReaction(int reaction) {
+            String sql = "UPDATE Data SET Reaction = " + reaction + " WHERE id = ?";
+            try {
+		PreparedStatement input = connect("benchmark_data").prepareStatement(sql);
+		input.executeUpdate();
+		conn.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+	}
 
         /**
 	 * Get table info
