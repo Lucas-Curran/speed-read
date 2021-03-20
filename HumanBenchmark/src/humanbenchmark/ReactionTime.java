@@ -26,16 +26,17 @@ public class ReactionTime extends Canvas implements MouseListener {
     public ReactionTime() {
         addMouseListener(this);
 
-
+        this.setBackground(Color.red);
  
       
-        text = "This is a reaction test. When the background turns green, click the screen. "
+        text = "This is a reaction test. \nWhen the background turns green, click the screen. \n"
                 + "Click the screen to begin.";
     }
 
     public void paint(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.drawString(text, 100, 100);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Consolas", Font.PLAIN, 36));
+        g.drawString(text, 50, 100);
     }
 
 
@@ -45,10 +46,9 @@ public class ReactionTime extends Canvas implements MouseListener {
         switch (counter) {
             
             case 0:
-                
                 try {
                 System.out.println(counter);
-                this.setBackground(Color.red);
+                
                 text = "";
                 repaint();
                 Thread.sleep(rNum.nextInt(10000) + 1000);
