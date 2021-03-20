@@ -6,6 +6,9 @@
 
 package humanbenchmark;
 
+import javax.swing.JDialog;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 /**
  * Copyright © 2021. All rights reserved.
  * @author Lucas Curran
@@ -26,21 +29,80 @@ public class Benchmark extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        readingButton = new javax.swing.JButton();
+        reactionButton = new javax.swing.JButton();
+        aimButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Human Benchmark");
+
+        readingButton.setText("Reading");
+        readingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                readingButtonActionPerformed(evt);
+            }
+        });
+
+        reactionButton.setText("Reaction");
+        reactionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reactionButtonActionPerformed(evt);
+            }
+        });
+
+        aimButton.setText("Aim");
+        aimButton.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(readingButton)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(reactionButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(aimButton))
+                    .addComponent(jLabel1))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(reactionButton)
+                    .addComponent(readingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aimButton))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void readingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readingButtonActionPerformed
+        JDialog win = new JDialog();
+        win.setSize(1024, 768);
+        win.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        win.add(new Reading());
+        win.setVisible(true);
+    }//GEN-LAST:event_readingButtonActionPerformed
+
+    private void reactionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reactionButtonActionPerformed
+        JDialog win = new JDialog();
+        win.setSize(1024, 768);
+        win.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        win.add(new ReactionTime());
+        win.setVisible(true);
+    }//GEN-LAST:event_reactionButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,6 +140,10 @@ public class Benchmark extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton aimButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton reactionButton;
+    private javax.swing.JButton readingButton;
     // End of variables declaration//GEN-END:variables
 
 }

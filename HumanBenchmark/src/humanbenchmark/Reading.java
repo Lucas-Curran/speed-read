@@ -6,10 +6,12 @@
 
 package humanbenchmark;
 
+import java.awt.Canvas;
+
 /**
  * Copyright © 2021. All rights reserved.
  * @author Lucas Curran
  */
-public class Reading {
+public class Reading extends Canvas {
 
 }
