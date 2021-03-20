@@ -89,7 +89,7 @@ public class SQLiteConnect {
          * @return
 	 */
 	public DefaultTableModel getData() {
-            String sql = "SELECT * ";
+            String sql = "SELECT * Data";
             
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("ID");
