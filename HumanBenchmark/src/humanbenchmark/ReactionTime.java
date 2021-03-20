@@ -73,12 +73,14 @@ public class ReactionTime extends Canvas implements MouseListener {
             case 1:
                 System.out.println("2");               
                 change = e.getWhen() - begin;
-                sqlite.updateReaction((int)change);
-                System.out.println(change);
-                textColor = Color.BLACK;
-                changeText = String.valueOf(change) + " ms";
-                text1 = "Click the screen again to replay";
-                repaint();
+                if (change > 0) {
+                    sqlite.updateReaction((int)change);
+                    System.out.println(change);
+                    textColor = Color.BLACK;
+                    changeText = String.valueOf(change) + " ms";
+                    text1 = "Click the screen again to replay";
+                    repaint();
+                }
                 break;
             case 2:
                 textColor = Color.WHITE;

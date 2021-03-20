@@ -58,7 +58,7 @@ public class SQLiteConnect {
          * @param timing
 	 */
 	public void updateTiming(int timing) {
-            String sql = "UPDATE Data SET Timing = " + timing + " WHERE id = ?";
+            String sql = "UPDATE Data SET Timing = " + timing + " WHERE id = (SELECT MAX(id) FROM Data)";
             try {
 		PreparedStatement input = connect("benchmark_data.db").prepareStatement(sql);
 		input.executeUpdate();
@@ -73,7 +73,7 @@ public class SQLiteConnect {
          * @param reaction
 	 */
 	public void updateReaction(int reaction) {
-            String sql = "UPDATE Data SET Reaction = " + reaction + " WHERE id = ?";
+            String sql = "UPDATE Data SET Reaction = " + reaction + " WHERE id = (SELECT MAX(id) FROM Data)";
             try {
 		PreparedStatement input = connect("benchmark_data.db").prepareStatement(sql);
 		input.executeUpdate();

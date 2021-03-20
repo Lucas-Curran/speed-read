@@ -29,7 +29,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * @author Lucas Curran
  */
 public class Reading extends Canvas implements MouseListener {
-    
+    SQLiteConnect sqlite = new SQLiteConnect();
     int counter = 0;
     String[] script = {""};
     int rNumber;
@@ -76,6 +76,7 @@ public class Reading extends Canvas implements MouseListener {
             g.drawString("You won " + winnerInt + " times!", 100, 130);
             g.drawString("You lost " + loserInt + " times!", 100, 160);
             counter = 100;
+            sqlite.updateTiming(winnerInt);
         }
         
         if (counter == 0 && tutorial == true) {
