@@ -59,9 +59,7 @@ public class ReactionTime extends Canvas implements MouseListener {
             
             case 0:
                 try {
-                System.out.println(counter);
-                
-                text1 = "";
+                System.out.println(counter);                
                 repaint();
                 Thread.sleep(rNum.nextInt(10000) + 1000);
                 this.setBackground(Color.green.darker());
@@ -73,7 +71,7 @@ public class ReactionTime extends Canvas implements MouseListener {
                 break;
                 
             case 1:
-                System.out.println("2");
+                System.out.println("2");               
                 change = e.getWhen() - begin;
                 System.out.println(change);
                 textColor = Color.BLACK;
