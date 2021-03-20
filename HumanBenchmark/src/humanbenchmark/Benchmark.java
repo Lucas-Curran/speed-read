@@ -14,7 +14,8 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * @author Lucas Curran
  */
 public class Benchmark extends javax.swing.JFrame {
-
+    
+    SQLiteConnect connect = new SQLiteConnect();
     /** Creates new form Benchmark */
     public Benchmark() {
         initComponents();
