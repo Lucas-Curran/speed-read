@@ -44,7 +44,7 @@ public class SQLiteConnect {
 	public void addRow() {
             String sql = "INSERT INTO Data(ID, Timing, Reaction, Date) VALUES(?,?,?,?) ";
             try {
-		PreparedStatement input = connect("benchmark_data").prepareStatement(sql);
+		PreparedStatement input = connect("benchmark_data.db").prepareStatement(sql);
                 input.setString(4, String.valueOf(java.time.LocalDate.now()));
 		input.executeUpdate();
 		conn.close();
@@ -60,7 +60,7 @@ public class SQLiteConnect {
 	public void updateTiming(int timing) {
             String sql = "UPDATE Data SET Timing = " + timing + " WHERE id = ?";
             try {
-		PreparedStatement input = connect("benchmark_data").prepareStatement(sql);
+		PreparedStatement input = connect("benchmark_data.db").prepareStatement(sql);
 		input.executeUpdate();
 		conn.close();
             } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class SQLiteConnect {
 	public void updateReaction(int reaction) {
             String sql = "UPDATE Data SET Reaction = " + reaction + " WHERE id = ?";
             try {
-		PreparedStatement input = connect("benchmark_data").prepareStatement(sql);
+		PreparedStatement input = connect("benchmark_data.db").prepareStatement(sql);
 		input.executeUpdate();
 		conn.close();
             } catch (SQLException e) {
@@ -89,7 +89,7 @@ public class SQLiteConnect {
          * @return
 	 */
 	public DefaultTableModel getData() {
-            String sql = "SELECT * Data";
+            String sql = "SELECT * FROM Data";
             
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("ID");

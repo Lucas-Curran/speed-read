@@ -22,7 +22,7 @@ public class ReactionTime extends Canvas implements MouseListener {
     Random rNum = new Random();
     private String text1, text2, text3, changeText;
     Color textColor;
-    
+    SQLiteConnect sqlite = new SQLiteConnect();
     
     public ReactionTime() {
         addMouseListener(this);
@@ -73,6 +73,7 @@ public class ReactionTime extends Canvas implements MouseListener {
             case 1:
                 System.out.println("2");               
                 change = e.getWhen() - begin;
+                sqlite.updateReaction((int)change);
                 System.out.println(change);
                 textColor = Color.BLACK;
                 changeText = String.valueOf(change) + " ms";
