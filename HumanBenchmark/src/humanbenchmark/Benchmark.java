@@ -100,7 +100,7 @@ public class Benchmark extends javax.swing.JFrame {
         JDialog win = new JDialog();
         win.setSize(1024, 768);
         win.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        //win.add(new ReactionTime());
+        win.add(new ReactionTime());
         win.setVisible(true);
     }//GEN-LAST:event_reactionButtonActionPerformed
 

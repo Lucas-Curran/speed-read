@@ -16,10 +16,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 /**
  * Copyright © 2021. All rights reserved.
  * @author Lucas Curran
@@ -28,67 +32,94 @@ public class Reading extends Canvas implements MouseListener {
     
     int counter = 0;
     String[] script = {""};
+    int rNumber;
+    Integer random = 0;
+    boolean winner = false;
+    boolean loser = false;
+    boolean tutorial = true;
+    int total = 0;
+    int loserInt = 0, winnerInt = 0;
     
     public Reading() {
         addMouseListener(this);
+        Random rNumb = new Random();
+        rNumber = rNumb.nextInt(10);
     }
     
-    public void paint( Graphics g ) {        
-        if (counter == 0) {
+    public void paint( Graphics g ) {      
+        g.setFont(new Font("Consolas", Font.PLAIN, 36)); 
+        
+        if (winner && counter == 2) {
+           g.drawString("Winner!", 100, 100);
+           g.drawString("Press to go again.", 100, 150);
+           counter = 0;
+           tutorial = false;
+           winner = false;
+           winnerInt++;
+           total++;
+        } else if (loser && counter == 2) {
+           g.drawString("Too slow!", 100, 100);
+           g.drawString("Press to go again.", 100, 150);
+           counter = 0;
+           tutorial = false;
+           loser = false;
+           loserInt++;
+           total++;
+        }
+        
+        if (total == 5) {
+            g.drawString("You are done!", 100, 100);
+            g.drawString("You won " + winnerInt + " times!", 100, 130);
+            g.drawString("You lost " + loserInt + " times!", 100, 160);
+            counter = 100;
+        }
+        
+        if (counter == 0 && tutorial == true) {
             g.setFont(new Font("Consolas", Font.PLAIN, 36));
           
-            g.drawString("This is a test for reading speed.", 100, 100);
-            g.drawString("The words will slowly increase in speed", 100, 150);
-            g.drawString("until you can no longer read them.", 100, 200);
-            g.drawString("Once you click, the test will begin.", 100, 250);
-            g.drawString("Click again once you can", 100, 300);
-            g.drawString("no longer read the text.", 100, 350);
-        } else if (counter == 1) {
-            g.setFont(new Font("Consolas", Font.PLAIN, 36));
+            g.drawString("This is a test for timing sense.", 50, 100);
+            g.drawString("Random numbers will flash on the screen,", 50, 150);
+            g.drawString("and you must click when a certain number pops up.", 50, 200);
+            g.drawString("You will do 5 rounds.", 50, 250);
+            g.drawString("Once you click, the test will begin.", 50, 300);           
+        } else if (counter == 1) {          
                    Timer timer = new Timer();
-                   int delay = 1;
+                   Random rNumb = new Random();
+                   int delay = 350;
+                   random = rNumb.nextInt(10);
+                   g.drawString("The number you need is: " + rNumber, 25, 400);
                    TimerTask tt = new TimerTask() {
                        @Override                   
                        public void run() {
-                           try {
-                                Color background = new Color(240,240,240);
-                                g.setColor(background);
-                                g.drawRect(0, 0, 1000, 1000);
-                                g.setColor(Color.BLACK);
-                                g.drawString(readLine(), 200,350);                               
-                                repaint();                         
-                           } catch (IOException ex) {
-                                Logger.getLogger(Reading.class.getName()).log(Level.SEVERE, null, ex);
-                           }
+                           Integer random = rNumb.nextInt(10);
+                           g.setColor(Color.BLACK);                                 
+                           repaint();                         
                        };
-                   };                  
-                  timer.scheduleAtFixedRate(tt, delay, 1); 
-        }
-    }
-
-    public String readLine()
-        throws IOException {
-            String file = "resources/script.txt";
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String currentLine = reader.readLine();           
-            reader.close();
-            return currentLine;
-}
+                   };                
+                  g.drawString(random.toString(), 400, 200);
+                  timer.schedule(tt, delay);
+            }
+        }          
     
     @Override
-    public void mouseClicked(MouseEvent e) {
+        public void mouseClicked(MouseEvent e) {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        
+        public void mousePressed(MouseEvent e) {      
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         counter++;
-        System.out.println(counter);
-        repaint();
+         if (rNumber == random && counter == 2) {
+                winner = true;
+         } else if (rNumber != random && counter == 2) {
+                loser = true;
+         }
+
+            //repaint();      
+        
     }
 
     @Override
