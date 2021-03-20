@@ -39,10 +39,10 @@ public class Reading extends Canvas implements MouseListener {
     boolean tutorial = true;
     int total = 0;
     int loserInt = 0, winnerInt = 0;
-    
+    Random rNumb;
     public Reading() {
         addMouseListener(this);
-        Random rNumb = new Random();
+        rNumb = new Random();
         rNumber = rNumb.nextInt(10);
     }
     
@@ -55,6 +55,8 @@ public class Reading extends Canvas implements MouseListener {
            counter = 0;
            tutorial = false;
            winner = false;
+           rNumb = new Random();
+           rNumber = rNumb.nextInt(10);
            winnerInt++;
            total++;
         } else if (loser && counter == 2) {
@@ -63,6 +65,8 @@ public class Reading extends Canvas implements MouseListener {
            counter = 0;
            tutorial = false;
            loser = false;
+           rNumb = new Random();
+           rNumber = rNumb.nextInt(10);
            loserInt++;
            total++;
         }
@@ -118,7 +122,7 @@ public class Reading extends Canvas implements MouseListener {
                 loser = true;
          }
 
-            //repaint();      
+         repaint();      
         
     }
 
